@@ -4,12 +4,16 @@ An AWS Serverless deployment of pouchdb-server, using AWS Lambda for compute and
 
 # wait, what?
 
-Think of it as an open-source alternative to IBM's Cloudant that you can deploy to your very own AWS Cloud account and free from Cloudant's minimum monthly charges ($75) or stingy free tier (1 GB).
+Think of it as an open-source alternative to IBM's Cloudant that you can deploy to your very own AWS Cloud account. AWS pricing can be significantly cheaper than Cloudant: at the low-end extreme, a 2GB database with a low amount of traffic costs only $0.60 per month to run on AWS, compared to $75 per month on Cloudant.
 
-Deploying on AWS only costs EFS charges ($0.30 per GB per month) and Lambda usage-based billing with $0 monthly fee ($0.0000166667 for every GB-second of function execution, plus $0.20 per million requests).
+# does it work?
 
-Pricing info as of Nov/2022.
+Yes! See the README in the project subfolder for more info.
 
-# status
+# still confused?
 
-Currently this is in Proof Of Concept stage. It "almost works."
+- PouchDB is a highly compatible rewrite of CouchDB, focused on Javascript APIs.
+
+- `pouchdb-server` is PouchDB wrapped with HTTP REST APIs which make it look more like CouchDB.
+
+- `pouchdb-aws-serverless` is `pouchdb-server` packaged and configured to run on the AWS Cloud
