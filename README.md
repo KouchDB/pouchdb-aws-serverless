@@ -4,12 +4,18 @@ An AWS Serverless deployment of pouchdb-server, using AWS Lambda for compute and
 
 # wait, what?
 
-Think of it as an open-source alternative to IBM's Cloudant that you can deploy to your very own AWS Cloud account and free from Cloudant's minimum monthly charges ($75) or stingy free tier (1 GB).
+Think of it as an open-source alternative to IBM's Cloudant that you can deploy to your very own AWS Cloud account. AWS pricing can be significantly cheaper than Cloudant: for instance, a low-usage 2GB database costs $0.60 per month on AWS, compared to $75 per month on Cloudant.
 
-Deploying on AWS only costs EFS charges ($0.30 per GB per month) and Lambda usage-based billing with $0 monthly fee ($0.0000166667 for every GB-second of function execution, plus $0.20 per million requests).
+# does it work?
 
-Pricing info as of Nov/2022.
+- `PUT` to create a database works fine
+- `PUT` to store a json document works fine but client has to send explicit `-H "Content-Type: application/json"`
+- `GET` to retrieve a stored document works fine
 
-# status
+Other functionality like `/_changes` and `/_utils` is not working right now.
 
-Currently this is in Proof Of Concept stage. It "almost works."
+Incremental map-reduce hasn't been tested yet.
+
+Security features have not been tested yet.
+
+Replication has not been tested yet.
