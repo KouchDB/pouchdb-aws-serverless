@@ -1,0 +1,6 @@
+node_modules
+/.aws-sam/
+/sandbox/
+/samconfig.toml
+/package-lock.json
+log.txt
