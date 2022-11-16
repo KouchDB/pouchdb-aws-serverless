@@ -8,14 +8,12 @@ Think of it as an open-source alternative to IBM's Cloudant that you can deploy 
 
 # does it work?
 
-- `PUT` to create a database works fine
-- `PUT` to store a json document works fine but client has to send explicit `-H "Content-Type: application/json"`
-- `GET` to retrieve a stored document works fine
+Yes! See the README in the project subfolder for more info.
 
-Other functionality like `/_changes` and `/_utils` is not working right now.
+# I'm still confused
 
-Incremental map-reduce hasn't been tested yet.
+- PouchDB is a highly compatible rewrite of CouchDB, focused on Javascript APIs.
 
-Security features have not been tested yet.
+- `pouchdb-server` is PouchDB wrapped with HTTP REST APIs which make it look more like CouchDB.
 
-Replication has not been tested yet.
+- `pouchdb-aws-serverless` is `pouchdb-server` packaged and configured to run on the AWS Cloud
