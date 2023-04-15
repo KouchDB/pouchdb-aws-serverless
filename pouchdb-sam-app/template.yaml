@@ -11,11 +11,11 @@ Parameters:
     Default: TestFileSystem
 
 Resources:
-  ExpressApi:
-    Type: AWS::Serverless::Api
-    Properties:
-      StageName: prod
-      BinaryMediaTypes: ['*/*']
+  # ExpressApi:
+  #   Type: AWS::Serverless::Api
+  #   Properties:
+  #     StageName: prod
+  #     BinaryMediaTypes: ['*/*']
 
   MountTargetVPC:
     Type: AWS::EC2::VPC
@@ -108,21 +108,24 @@ Resources:
       Runtime: nodejs16.x
       Architectures:
         - x86_64
-      MemorySize: 128
-      Timeout: 100
-      Events:
-        ExpressFunctionProxy:
-          Type: Api
-          Properties:
-            RestApiId: !Ref ExpressApi
-            Path: "/{proxy+}"
-            Method: ANY
-        ExpressFunctionRoot:
-          Type: Api
-          Properties:
-            RestApiId: !Ref ExpressApi
-            Path: "/"
-            Method: ANY
+      MemorySize: 2048
+      Timeout: 30
+      FunctionUrlConfig:
+        AuthType: NONE
+
+      # Events:
+      #   ExpressFunctionProxy:
+      #     Type: Api
+      #     Properties:
+      #       RestApiId: !Ref ExpressApi
+      #       Path: "/{proxy+}"
+      #       Method: ANY
+      #   ExpressFunctionRoot:
+      #     Type: Api
+      #     Properties:
+      #       RestApiId: !Ref ExpressApi
+      #       Path: "/"
+      #       Method: ANY
       VpcConfig:
         SecurityGroupIds:
         - !GetAtt MountTargetVPC.DefaultSecurityGroup
@@ -152,6 +155,7 @@ Resources:
           Resource: "*"
 
 Outputs:
-  WebEndpoint:
-    Description: "API Gateway endpoint URL for Prod stage"
-    Value: !Sub "https://${ExpressApi}.execute-api.${AWS::Region}.amazonaws.com/prod/"
+  FunctionUrlEndpoint:
+      Description: "Lambda Function URL Endpoint"
+      Value:
+        Fn::GetAtt: pouchdbAdapterFunctionUrl.FunctionUrl
